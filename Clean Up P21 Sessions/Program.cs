@@ -85,16 +85,16 @@ namespace Clean_Up_P21_Sessions
         {
             var licenseId = session["SessionId"];
             var request2 = new HttpRequestMessage(HttpMethod.Delete, "/api/licensing/usage/" + licenseId);
-            request2.Headers.Add("Host", "p21.raritanpipe.com");
+            request2.Headers.Add("Host", baseUri);
             request2.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
             request2.Headers.Add("Accept", " application/json");
             request2.Headers.Add("Accept-Language", " en-US,en;q=0.5");
             request2.Headers.Add("Accept-Encoding", " gzip, deflate, br");
             request2.Headers.Add("Authorization", authToken);
             request2.Headers.Add("X-Requested-With", " XMLHttpRequest");
-            request2.Headers.Add("Origin", " https://p21.raritanpipe.com");
+            request2.Headers.Add("Origin", " https://" + baseUri);
             request2.Headers.Add("Connection", " keep-alive");
-            request2.Headers.Add("Referer", " https://p21.raritanpipe.com/UiServer/");
+            request2.Headers.Add("Referer", " https://" + baseUri + "UiServer/");
             request2.Headers.Add("Cookie", cookie);
             request2.Headers.Add("Sec-Fetch-Dest", " empty");
             request2.Headers.Add("Sec-Fetch-Mode", " cors");
@@ -110,7 +110,7 @@ namespace Clean_Up_P21_Sessions
             try
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "/api/licensing/usage");
-                request.Headers.Add("Host", "p21.raritanpipe.com");
+                request.Headers.Add("Host", baseUri);
                 request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
                 request.Headers.Add("Accept", " application/json");
                 request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
@@ -176,7 +176,7 @@ namespace Clean_Up_P21_Sessions
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, "https://" + baseUri + "/docs/logon.aspx");
-                request.Headers.Add("Host", " p21.raritanpipe.com");
+                request.Headers.Add("Host", baseUri);
                 request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
                 request.Headers.Add("Accept", " text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
                 request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
@@ -209,7 +209,7 @@ namespace Clean_Up_P21_Sessions
             {
                 var licenseId = userSession["SessionId"];
                 var request2 = new HttpRequestMessage(HttpMethod.Delete, "/api/licensing/usage/" + licenseId);
-                request2.Headers.Add("Host", "p21.raritanpipe.com");
+                request2.Headers.Add("Host", baseUri);
                 request2.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
                 request2.Headers.Add("Accept", " application/json");
                 request2.Headers.Add("Accept-Language", " en-US,en;q=0.5");
