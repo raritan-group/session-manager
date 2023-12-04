@@ -20,9 +20,13 @@ namespace Clean_Up_P21_Sessions
         private string password;
         private string playBaseUri;
         public Program ()
-        {            
-            baseUri = "p21.raritanpipe.com";
-            playBaseUri = "p21play-2.raritanpipe.com";
+        {
+            //enter your live uri here
+
+            Console.WriteLine("Enter your middleware URI: ");
+            baseUri = Console.ReadLine();
+            //potential other middleware instances
+            //playBaseUri = "";
             aspDotNetSessionId = " ASP.NET_SessionId=qbeh5xivfjs3hjpg5ddpxodg";
             client = new HttpClient();
             client.BaseAddress = new Uri("https://" + baseUri);
@@ -39,7 +43,7 @@ namespace Clean_Up_P21_Sessions
             password = Console.ReadLine();
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://p21.raritanpipe.com/api/security/token/");
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://" + baseUri + "/api/security/token/");
                 request.Headers.Add("Host", baseUri);
                 request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
                 request.Headers.Add("Accept", " application/xml");
@@ -48,9 +52,9 @@ namespace Clean_Up_P21_Sessions
                 request.Headers.Add("username", userName);
                 request.Headers.Add("password", password);
                 request.Headers.Add("X-Requested-With", " XMLHttpRequest");
-                request.Headers.Add("Origin", " https://p21.raritanpipe.com");
+                request.Headers.Add("Origin", baseUri);
                 request.Headers.Add("Connection", " keep-alive");
-                request.Headers.Add("Referer", " https://p21.raritanpipe.com/docs/logon.aspx");
+                request.Headers.Add("Referer", "https://" + baseUri + "/docs/logon.aspx");
                 request.Headers.Add("Cookie", aspDotNetSessionId);
                 request.Headers.Add("Sec-Fetch-Dest", " empty");
                 request.Headers.Add("Sec-Fetch-Mode", " cors");
@@ -114,7 +118,7 @@ namespace Clean_Up_P21_Sessions
                 request.Headers.Add("Authorization", authToken);
                 request.Headers.Add("X-Requested-With", " XMLHttpRequest");
                 request.Headers.Add("Connection", " keep-alive");
-                request.Headers.Add("Referer", " https://p21.raritanpipe.com/UiServer/");
+                request.Headers.Add("Referer", " https://" + baseUri + "/UiServer/");
                 request.Headers.Add("Cookie", cookie);
                 request.Headers.Add("Sec-Fetch-Dest", " empty");
                 request.Headers.Add("Sec-Fetch-Mode", " cors");
@@ -171,14 +175,14 @@ namespace Clean_Up_P21_Sessions
         {
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, "https://p21.raritanpipe.com/docs/logon.aspx");
+                var request = new HttpRequestMessage(HttpMethod.Get, "https://" + baseUri + "/docs/logon.aspx");
                 request.Headers.Add("Host", " p21.raritanpipe.com");
                 request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
                 request.Headers.Add("Accept", " text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
                 request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
                 request.Headers.Add("Accept-Encoding", " gzip, deflate, br");
                 request.Headers.Add("Connection", " keep-alive");
-                request.Headers.Add("Referer", " https://p21.raritanpipe.com/UiServer/");
+                request.Headers.Add("Referer", " https://" + baseUri + "/UiServer/");
                 request.Headers.Add("Cookie", cookie);
                 request.Headers.Add("Upgrade-Insecure-Requests", " 1");
                 request.Headers.Add("Sec-Fetch-Dest", " document");
@@ -212,9 +216,9 @@ namespace Clean_Up_P21_Sessions
                 request2.Headers.Add("Accept-Encoding", " gzip, deflate, br");
                 request2.Headers.Add("Authorization", authToken);
                 request2.Headers.Add("X-Requested-With", " XMLHttpRequest");
-                request2.Headers.Add("Origin", " https://p21.raritanpipe.com");
+                request2.Headers.Add("Origin", " https://" + baseUri);
                 request2.Headers.Add("Connection", " keep-alive");
-                request2.Headers.Add("Referer", " https://p21.raritanpipe.com/UiServer/");
+                request2.Headers.Add("Referer", " https://" + baseUri + "/UiServer/");
                 request2.Headers.Add("Cookie", cookie);
                 request2.Headers.Add("Sec-Fetch-Dest", " empty");
                 request2.Headers.Add("Sec-Fetch-Mode", " cors");
