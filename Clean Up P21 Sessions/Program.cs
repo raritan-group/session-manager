@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json.Nodes;
 using System.Xml;
+using System.Numerics;
 
 namespace Clean_Up_P21_Sessions
 {
@@ -134,6 +135,7 @@ namespace Clean_Up_P21_Sessions
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Environment.ExitCode = 1;
                 return null;
             }            
         }
@@ -168,6 +170,8 @@ namespace Clean_Up_P21_Sessions
             {
                 if (ex.GetType() == typeof(HttpRequestException))
                     Console.WriteLine(ex.ToString() + "\nMake sure to check that the originating middleware session is still alive");
+
+                Environment.ExitCode = 1;
             }                  
         }  
 
