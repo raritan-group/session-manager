@@ -135,7 +135,8 @@ namespace Clean_Up_P21_Sessions
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Environment.ExitCode = 1;
+                Console.WriteLine("Please obtain a new token.");
+                this.authTokenRequest();
                 return null;
             }            
         }
@@ -168,8 +169,8 @@ namespace Clean_Up_P21_Sessions
             }
             catch (Exception ex)
             {
-                if (ex.GetType() == typeof(HttpRequestException))
-                    Console.WriteLine(ex.ToString() + "\nMake sure to check that the originating middleware session is still alive");
+                Console.WriteLine(ex.ToString() + "\nPlease create a new middleware token.");
+                this.authTokenRequest();
 
                 Environment.ExitCode = 1;
             }                  
