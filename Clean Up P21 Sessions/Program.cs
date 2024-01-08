@@ -38,48 +38,93 @@ namespace Clean_Up_P21_Sessions
 
         public void authTokenRequest() 
         {
-            Console.Write("Please enter your user name:");
-            userName = Console.ReadLine();
-            Console.Write("Please enter your password:");
-            password = Console.ReadLine();
-            try
+            if (this.userName == null || this.password == null)
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://" + baseUri + "/api/security/token/");
-                request.Headers.Add("Host", baseUri);
-                request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
-                request.Headers.Add("Accept", " application/xml");
-                request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
-                request.Headers.Add("Accept-Encoding", " gzip, deflate, br");
-                request.Headers.Add("username", userName);
-                request.Headers.Add("password", password);
-                request.Headers.Add("X-Requested-With", " XMLHttpRequest");
-                request.Headers.Add("Origin", baseUri);
-                request.Headers.Add("Connection", " keep-alive");
-                request.Headers.Add("Referer", "https://" + baseUri + "/docs/logon.aspx");
-                request.Headers.Add("Cookie", aspDotNetSessionId);
-                request.Headers.Add("Sec-Fetch-Dest", " empty");
-                request.Headers.Add("Sec-Fetch-Mode", " cors");
-                request.Headers.Add("Sec-Fetch-Site", " same-origin");
-                request.Headers.Add("Pragma", " no-cache");
-                request.Headers.Add("Cache-Control", " no-cache");
-                //request.Headers.Add("Content-Length", " 0");
-                request.Headers.Add("TE", " trailers");
-                var response = this.client.SendAsync(request);
-                response.Wait();
-                response.Result.EnsureSuccessStatusCode();
-                xmlDocument.LoadXml(response.Result.Content.ReadAsStringAsync().Result);           
-                authToken = "Bearer " + xmlDocument.DocumentElement.FirstChild.InnerText;
-               
-            }
-            catch (Exception ex) 
-            {                           
-                Console.WriteLine("Unable to retreive token.\n" + ex);
-                if (ex.Message.Contains("Unauthorized"))
+                Console.Write("Please enter your user name:");
+                userName = Console.ReadLine();
+                Console.Write("Please enter your password:");
+                password = Console.ReadLine();
+                try
                 {
-                    Console.WriteLine("Unable to authenticate please renter your information.");
-                    Console.WriteLine("Incorrect username or password.");
-                    this.authTokenRequest();
-                }               
+                    var request = new HttpRequestMessage(HttpMethod.Post, "https://" + baseUri + "/api/security/token/");
+                    request.Headers.Add("Host", baseUri);
+                    request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
+                    request.Headers.Add("Accept", " application/xml");
+                    request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
+                    request.Headers.Add("Accept-Encoding", " gzip, deflate, br");
+                    request.Headers.Add("username", userName);
+                    request.Headers.Add("password", password);
+                    request.Headers.Add("X-Requested-With", " XMLHttpRequest");
+                    request.Headers.Add("Origin", baseUri);
+                    request.Headers.Add("Connection", " keep-alive");
+                    request.Headers.Add("Referer", "https://" + baseUri + "/docs/logon.aspx");
+                    request.Headers.Add("Cookie", aspDotNetSessionId);
+                    request.Headers.Add("Sec-Fetch-Dest", " empty");
+                    request.Headers.Add("Sec-Fetch-Mode", " cors");
+                    request.Headers.Add("Sec-Fetch-Site", " same-origin");
+                    request.Headers.Add("Pragma", " no-cache");
+                    request.Headers.Add("Cache-Control", " no-cache");
+                    //request.Headers.Add("Content-Length", " 0");
+                    request.Headers.Add("TE", " trailers");
+                    var response = this.client.SendAsync(request);
+                    response.Wait();
+                    response.Result.EnsureSuccessStatusCode();
+                    xmlDocument.LoadXml(response.Result.Content.ReadAsStringAsync().Result);
+                    authToken = "Bearer " + xmlDocument.DocumentElement.FirstChild.InnerText;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unable to retreive token.\n" + ex);
+                    if (ex.Message.Contains("Unauthorized"))
+                    {
+                        Console.WriteLine("Unable to authenticate please renter your information.");
+                        Console.WriteLine("Incorrect username or password.");
+                        this.authTokenRequest();
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    var request = new HttpRequestMessage(HttpMethod.Post, "https://" + baseUri + "/api/security/token/");
+                    request.Headers.Add("Host", baseUri);
+                    request.Headers.Add("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
+                    request.Headers.Add("Accept", " application/xml");
+                    request.Headers.Add("Accept-Language", " en-US,en;q=0.5");
+                    request.Headers.Add("Accept-Encoding", " gzip, deflate, br");
+                    request.Headers.Add("username", userName);
+                    request.Headers.Add("password", password);
+                    request.Headers.Add("X-Requested-With", " XMLHttpRequest");
+                    request.Headers.Add("Origin", baseUri);
+                    request.Headers.Add("Connection", " keep-alive");
+                    request.Headers.Add("Referer", "https://" + baseUri + "/docs/logon.aspx");
+                    request.Headers.Add("Cookie", aspDotNetSessionId);
+                    request.Headers.Add("Sec-Fetch-Dest", " empty");
+                    request.Headers.Add("Sec-Fetch-Mode", " cors");
+                    request.Headers.Add("Sec-Fetch-Site", " same-origin");
+                    request.Headers.Add("Pragma", " no-cache");
+                    request.Headers.Add("Cache-Control", " no-cache");
+                    //request.Headers.Add("Content-Length", " 0");
+                    request.Headers.Add("TE", " trailers");
+                    var response = this.client.SendAsync(request);
+                    response.Wait();
+                    response.Result.EnsureSuccessStatusCode();
+                    xmlDocument.LoadXml(response.Result.Content.ReadAsStringAsync().Result);
+                    authToken = "Bearer " + xmlDocument.DocumentElement.FirstChild.InnerText;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unable to retreive token.\n" + ex);
+                    if (ex.Message.Contains("Unauthorized"))
+                    {
+                        Console.WriteLine("Unable to authenticate please renter your information.");
+                        Console.WriteLine("Incorrect username or password.");
+                        this.authTokenRequest();
+                    }
+                }
             }
         }
         public void LogOutDuplicateSessions(JsonNode session)
